@@ -4,165 +4,200 @@ title: API Reference
 language_tabs:
   - shell
   - ruby
-  - python
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
-includes:
+<!-- includes:
   - errors
-
+ -->
 search: true
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the Reportinc API! You can use our API to access Reportinc API endpoints, which can create, get, and modify events and users.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have language bindings in Shell and Ruby. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+# Events
 
-# Authentication
+## Get All Events
 
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
+Returns all of the events in the database as json
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+curl "http://reportinc.herokuapp.com/api/events"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "events": [
+    {
+      "id": 2,
+      "title": "Cam Tripped in the street",
+      "description": "I fell and I can't get up!",
+      "resp_time": null,
+      "reports": null,
+      "danger": 4,
+      "progress": null,
+      "event_date": "2016-01-01",
+      "lat": "42.4081478",
+      "lng": "-71.12603439999998",
+      "user_id": 3
+    },
+    {
+      "id": 1,
+      "title": "Bon Fire in that there forest",
+      "description": "I know that this isn't a forest BUT its dangerous none the less",
+      "resp_time": null,
+      "reports": null,
+      "danger": 4,
+      "progress": null,
+      "event_date": "2016-03-02",
+      "lat": "51.5073509",
+      "lng": "-0.12775829999998223",
+      "user_id": 2
+    }
+  ]
 }
 ```
 
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET http://reportinc.herokuapp.com/api/events`
 
-### URL Parameters
+## Get a Specific Event
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+Returns a specific event, by event ID number as json
 
+```shell
+curl "http://reportinc.herokuapp.com/api/events/[ID]"
+```
+> For example, the command: >
+```shell
+curl "http://reportinc.herokuapp.com/api/events/1"
+``` 
+> Would return JSON structured like this:
+
+```json
+[
+  {
+    "id": 1,
+    "title": "Bon Fire in that there forest",
+    "description": "I know that this isn't a forest BUT its dangerous none the less",
+    "resp_time": null,
+    "reports": null,
+    "danger": 4,
+    "progress": null,
+    "event_date": "2016-03-02",
+    "lng": "-0.12775829999998223",
+    "lat": "51.5073509",
+    "created_at": "2016-03-14T17:55:26.494Z",
+    "updated_at": "2016-03-14T17:55:26.494Z",
+    "user_id": 2
+  }
+]
+```
+### HTTP Request
+
+`GET http://reportinc.herokuapp.com/api/events/[ID]`
+
+## Update Event
+
+Updates an existing event given an its ID number, returns the updated JSON of that event
+
+```shell
+curl -X PUT -d [key]=[value] "http://reportinc.herokuapp.com/api/events/[ID]"
+```
+
+Keys can be: event id, title, description, response time, reports, danger, progress, event date, latitude, longitude, user id
+
+### HTTP Request
+
+`PUT http://reportinc.herokuapp.com/api/events/[ID]`
+
+## Create Event
+
+Creates a new event with the given parameters, returns the JSON of that event
+
+```shell
+curl --data "[key1]=[value1]&[key2]=[value2]" "http://reportinc.herokuapp.com/api/events/[ID]"
+```
+
+Required fields are: user id, title, event date, latitude, and longitude
+
+### HTTP Request
+
+`POST http://reportinc.herokuapp.com/api/events/`
+
+# Users
+
+## Get User by ID
+
+There is no general GET request for all registered users for privacy reasons. However, you can look up individual users by user ID. This will likely be overhauled once we have implemented more user authentication.
+
+Returns a specific event, by user ID number as json
+
+```shell
+curl "http://reportinc.herokuapp.com/api/users/[ID]"
+```
+> For example, the command: >
+```shell
+curl "http://reportinc.herokuapp.com/api/users/1"
+``` 
+> Would return JSON structured like this:
+
+```json
+[
+  {
+    "user": {
+      "id": 1,
+      "first": "Josh",
+      "last": "Barl",
+      "phone": "5555555555",
+      "email": "joshuabarl@tufts.edu",
+      "username": "joshbarl",
+      "password": null,
+      "password_confirmation": null,
+      "auth_token": "3FJLAPQTQJVykh37x24R"
+    }
+  }
+]
+```
+
+### HTTP Request
+
+`GET http://reportinc.herokuapp.com/api/users/[ID]`
+
+## Update User
+
+Updates an existing user given an their ID number, returns the updated JSON of that user
+
+```shell
+curl -X PUT -d [key]=[value] "http://reportinc.herokuapp.com/api/users/[ID]"
+```
+
+Keys can be: user id, first name, last name, phone number, email, username, password
+
+### HTTP Request
+
+`PUT http://reportinc.herokuapp.com/api/users/[ID]`
+
+## Create User
+
+Creates a new user with the given parameters, returns the JSON of that user
+
+```shell
+curl --data "[key1]=[value1]&[key2]=[value2]" "http://reportinc.herokuapp.com/api/users/[ID]"
+```
+
+Required fields are: last name, email, username, and password
+
+### HTTP Request
+
+`POST http://reportinc.herokuapp.com/api/users/`
