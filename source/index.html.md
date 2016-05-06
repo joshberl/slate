@@ -35,34 +35,37 @@ curl "http://reportinc.herokuapp.com/api/events"
 
 ```json
 {
-  "events": [
-    {
-      "id": 2,
-      "title": "Cam Tripped in the street",
-      "description": "I fell and I can't get up!",
-      "resp_time": null,
-      "reports": null,
-      "danger": 4,
-      "progress": null,
-      "event_date": "2016-01-01",
-      "lat": "42.4081478",
-      "lng": "-71.12603439999998",
-      "user_id": 3
-    },
-    {
-      "id": 1,
-      "title": "Bon Fire in that there forest",
-      "description": "I know that this isn't a forest BUT its dangerous none the less",
-      "resp_time": null,
-      "reports": null,
-      "danger": 4,
-      "progress": null,
-      "event_date": "2016-03-02",
-      "lat": "51.5073509",
-      "lng": "-0.12775829999998223",
-      "user_id": 2
-    }
-  ]
+    "events":[
+        {
+            "id":114,
+            "title":"Russell",
+            "description":"",
+            "danger":3,
+            "prog_level":"Need Assistance",
+            "event_date":"2016-05-05",
+            "lat":"42.418118",
+            "lng":"-71.108858",
+            "user_id":1,
+            "created_at":"2016-05-05T18:44:56.940Z",
+            "avatar_url":null,
+            "department":"Events Management"
+        },
+        {
+            "id":113,
+            "title":"Russell",
+            "description":"",
+            "danger":3,
+            "prog_level":"Need Assistance",
+            "event_date":"2016-05-05",
+            "lat":"42.418118",
+            "lng":"-71.108858",
+            "user_id":1,
+            "created_at":"2016-05-05T18:44:56.919Z",
+            "avatar_url":null,
+            "department":null
+        }, 
+        ...more_events...
+    ]
 }
 ```
 
@@ -85,23 +88,22 @@ curl "http://reportinc.herokuapp.com/api/events/1"
 > Would return JSON structured like this:
 
 ```json
-[
-  {
-    "id": 1,
-    "title": "Bon Fire in that there forest",
-    "description": "I know that this isn't a forest BUT its dangerous none the less",
-    "resp_time": null,
-    "reports": null,
-    "danger": 4,
-    "progress": null,
-    "event_date": "2016-03-02",
-    "lng": "-0.12775829999998223",
-    "lat": "51.5073509",
-    "created_at": "2016-03-14T17:55:26.494Z",
-    "updated_at": "2016-03-14T17:55:26.494Z",
-    "user_id": 2
-  }
-]
+{
+    "event": {
+            "id":1,
+            "title":"Bon Fire in that there forest",
+            "description":"I know that this isn't a forest BUT its dangerous none the less",
+            "danger":4,
+            "prog_level":"Need Assistance",
+            "event_date":"2016-03-02",
+            "lat":"51.507351",
+            "lng":"-0.127758",
+            "user_id":2,
+            "created_at":"2016-03-14T17:55:26.494Z",
+            "avatar_url":null,
+            "department":null
+    }
+}
 ```
 ### HTTP Request
 
@@ -153,21 +155,18 @@ curl "http://reportinc.herokuapp.com/api/users/1"
 > Would return JSON structured like this:
 
 ```json
-[
-  {
+{
     "user": {
-      "id": 1,
-      "first": "Josh",
-      "last": "Barl",
-      "phone": "5555555555",
-      "email": "joshuabarl@tufts.edu",
-      "username": "joshbarl",
-      "password": null,
-      "password_confirmation": null,
-      "auth_token": "3FJLAPQTQJVykh37x24R"
+        "id":1,
+        "first":"Josh",
+        "last":"Barl",
+        "phone":"5555555555",
+        "email":"joshuabarl@tufts.edu",
+        "username":"joshbarl",
+        "department":"Sustainability",
+        "admin":true
     }
-  }
-]
+}
 ```
 
 ### HTTP Request
@@ -201,3 +200,5 @@ Required fields are: last name, email, username, and password
 ### HTTP Request
 
 `POST http://reportinc.herokuapp.com/api/users/`
+
+The same API functions exist for tags, event_tags, event_photos, and sessions
